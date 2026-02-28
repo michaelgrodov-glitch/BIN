@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>BIN - Dashboard</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+        .secret-content { display: none; } /* Скрыто по умолчанию */
+    </style>
+</head>
+<body>
+
+    <div id="accessDenied">
+        <h1>Access Denied</h1>
+        <p>Please login first!</p>
+        <a href="index.html">Go to Login</a>
+    </div>
+
+    <div id="content" class="secret-content">
+        <h1>Welcome to the Secret BIN Area! 🏆</h1>
+        <p>This is your private page.</p>
+        <button id="logout">Logout</button>
+    </div>
+
+    <script>
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        const content = document.getElementById('content');
+        const denied = document.getElementById('accessDenied');
+        const logoutBtn = document.getElementById('logout');
+
+        // Проверка: вошел ли пользователь?
+        if (isLoggedIn === 'true') {
+            content.style.display = 'block'; // Показываем контент
+            denied.style.display = 'none';   // Скрываем ошибку
+        }
+
+        // Кнопка выхода
+        logoutBtn.onclick = () => {
+            localStorage.removeItem('isLoggedIn'); // Удаляем статус входа
+            window.location.href = 'index.html';   // Возвращаемся
+        };
+    </script>
+</body>
+</html>
