@@ -46,6 +46,11 @@ const logBtn = document.getElementById('log');
 regBtn.addEventListener('click', () => {
   const password = regInput.value;
   if (password) {
+    let users = JSON.parse(localStorage.getItem('bin_users')) || [];
+        users.push({ pass: password });
+        localStorage.setItem('bin_users', JSON.stringify(users));
+        alert('Registered! Total users: ' + users.length);
+        regInput.value = '';
     localStorage.setItem('bin_password', password);
     alert('All saved!');
     regInput.value = '';
