@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="he">
+  <head>
+    <meta charset="UTF-8">
+    <title>bin</title>
+  </head>
+  <body>
+  <h1>BIN OFFICLE</h1>
+  <h3>plese regestrate to the bin!</h3>
+  <input type="password" placeholder="plese enter here your password">
+  <button id="reg">save</button>
+  <h3>allready have an account?</h3>
+  <input type="password" placeholder="plese login">
+  <button id="log">login</button>
+  </body>
+  <style>
+    body {
+  background-color: rgb(0, 68, 21);
+  margin: 0;
+  padding: 20px;
+  font-family: sans-serif;
+}
+button {
+  color: rgb(128, 186, 19);
+  background-color: rgb(0, 0, 0);
+  border-radius: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 15px;
+  border: none;
+}
+input {
+  color: rgb(0, 0, 0);
+  background-color: rgb(20, 29, 96);
+  border: none;
+  padding: 10px;
+  outline: none;
+    border-radius: 50px;
+}
+  </style>
+    <script>
+      const regInput = document.querySelector('input[placeholder="plese enter here your password"]');
+const logInput = document.querySelector('input[placeholder="plese login"]');
+const regBtn = document.getElementById('reg');
+const logBtn = document.getElementById('log');
+regBtn.addEventListener('click', () => {
+  const password = regInput.value;
+  if (password) {
+    localStorage.setItem('bin_password', password);
+    alert('All saved!');
+    regInput.value = '';
+  } else {
+    alert('Enter password!');
+  }
+});
+logBtn.addEventListener('click', () => {
+  const savedPass = localStorage.getItem('bin_password');
+  const enteredPass = logInput.value;
+  if (savedPass === null) {
+    alert('No account found. Please register first!');
+  } else if (enteredPass === savedPass) {
+    alert('Access granted! Welcome to the BIN.');
+    window.location.href = "page2.html";
+  } else {
+    alert('Wrong password! Try again.');
+  }
+});
+    </script>
+  </html>
