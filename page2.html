@@ -6,22 +6,57 @@
     <style>
         body {
             background-color: rgb(0, 0, 0);
-            color: white; /* Чтобы текст был виден на черном фоне */
+            color: white;
             font-family: sans-serif;
             text-align: center;
+        }
+        #wall {
+            border: 1px solid white;
+            width: 80%;
+            margin: 20px auto;
+            padding: 10px;
+            min-height: 100px;
+            text-align: left;
+        }
+        .post {
+            border-bottom: 1px gray solid;
+            padding: 5px;
+            color: #00ff00; /* Сообщения будут зелеными */
         }
     </style>
 </head>
 <body>
     <h1>Welcome to BIN</h1>
     <p>Total registered users: <span id="userCount">0</span></p>
-
+    <hr>
+    <h3>Public Bin Wall</h3>
+    <input type="text" id="messageInput" placeholder="Write something...">
+    <button id="sendBtn">Post</button>
+    <div id="wall">
+    </div>
     <script>
-        // Получаем массив пользователей из памяти
         const users = JSON.parse(localStorage.getItem('bin_users')) || [];
-        
-        // Находим спан и записываем туда длину массива (количество)
         document.getElementById('userCount').innerText = users.length;
+        const wall = document.getElementById('wall');
+        const input = document.getElementById('messageInput');
+        const btn = document.getElementById('sendBtn');
+        function createPost(text) {
+            const p = document.createElement('p');
+            p.className = 'post';
+            p.innerText = ">> " + text;
+            wall.appendChild(p);
+        }
+        const savedMessages = JSON.parse(localStorage.getItem('bin_messages')) || [];
+        savedMessages.forEach(msg => createPost(msg));
+        btn.onclick = () => {
+            const text = input.value;
+            if (text) {
+                savedMessages.push(text);
+                localStorage.setItem('bin_messages', JSON.stringify(savedMessages));
+                createPost(text);
+                input.value = '';
+            }
+        };
     </script>
 </body>
 </html>
