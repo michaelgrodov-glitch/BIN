@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>BIN - page2</title>
+    <style>
+        body {
+            background-color: rgb(0, 0, 0);
+            color: white; /* Чтобы текст был виден на черном фоне */
+            font-family: sans-serif;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h1>welcome to BIN</h1>
-    
+    <h1>Welcome to BIN</h1>
+    <p>Total registered users: <span id="userCount">0</span></p>
+
+    <script>
+        // Получаем массив пользователей из памяти
+        const users = JSON.parse(localStorage.getItem('bin_users')) || [];
+        
+        // Находим спан и записываем туда длину массива (количество)
+        document.getElementById('userCount').innerText = users.length;
+    </script>
 </body>
-    <style>
-        background-color:rgb(0,0,0);
-    </style>
 </html>
